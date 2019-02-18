@@ -1,3 +1,6 @@
+/**
+ * @param
+ */
 class Test {
     constructor (a, b) {
         this.name = a
