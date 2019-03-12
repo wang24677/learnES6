@@ -37,12 +37,13 @@ let dome2 = () => {
     weakSet.add(obj)
     console.log(weakSet.has(obj),weakSet.has(obj1),weakSet.has(obj2))
     weakSet.delete({c:'c'}) // 使用{}会割裂对象的引用
+    // weakSet.clear(obj) // 不存在clear(方法)
     console.log(weakSet.has(obj))
     // let arr = [...weakSet]
     // console.log(arr)
 
 }
-// dome2()
+dome2()
 
 /**
  * set与weakSet的区别 item失去引用后释放
