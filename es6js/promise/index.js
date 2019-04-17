@@ -8,25 +8,38 @@
 // }
 
 // //	Node.js	范例
-// let fs = require("fs");
+let fs = require("fs");
 
-// function readFile(filename) {
-//     return new Promise(function (resolve, reject) {
-//         //	触发异步操作
-//         fs.readFile('../serve.js', {
-//             encoding: "utf8"
-//         }, function (err, contents) {
-//             //	检查错误
-//             if (err) {
-//                 reject(err);
-//                 return;
-//             }
-//             //	读取成功
-//             resolve(contents);
-//         });
-//     });
-// }
-// let promise = readFile("example.txt");
+function readFile(filename) {
+    return new Promise(function (resolve, reject) {
+        //	触发异步操作
+        fs.readFile('../serve.js', {
+            encoding: "utf8"
+        }, function (err, contents) {
+            //	检查错误
+            if (err) {
+                reject(err);
+            } else {
+                //	读取成功
+                resolve(contents);
+            }
+        });
+    });
+}
+let promise = readFile();
+
+promise.then((data) => {
+    console.log(data)
+    return new Promise(function (resolve, reject) {
+        setTimeout(() => { resolve(5)
+        }, 1000)
+    })
+}).then(data => {
+    console.log(data)
+})
+.catch(err => {
+    console.log('false')
+})
 //	同时监听完成与拒绝
 
 // loadImageAsync('开始')
@@ -72,23 +85,23 @@
 //     });
 // }, 1000);
 
-let p1 = new Promise(function (resolve, reject) {
-    resolve(42);
-});
-let p2 = new Promise(function (resolve, reject) {
-    resolve(43);
-});
-let p3 = new Promise(function (resolve, reject) {
-    reject(44);
-});
-let p4 = Promise.all([p1, p2, p3]);
-let p5 = Promise.race([p1, p2, p3]);
-// p4.then(val => {
-//         console.log(Array.isArray(val)) //	false
-//         console.log(val); //	43
-//     })
-p4.then(function (value) {
-    console.log(value); //	43
-}).catch(val => {
-    console.log(val)
-})
+// let p1 = new Promise(function (resolve, reject) {
+//     resolve(42);
+// });
+// let p2 = new Promise(function (resolve, reject) {
+//     resolve(43);
+// });
+// let p3 = new Promise(function (resolve, reject) {
+//     reject(44);
+// });
+// let p4 = Promise.all([p1, p2, p3]);
+// let p5 = Promise.race([p1, p2, p3]);
+// // p4.then(val => {
+// //         console.log(Array.isArray(val)) //	false
+// //         console.log(val); //	43
+// //     })
+// p4.then(function (value) {
+//     console.log(value); //	43
+// }).catch(val => {
+//     console.log(val)
+// })
